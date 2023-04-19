@@ -11,6 +11,8 @@ bundle exec rake db:migrate
 echo "Running BUNDLE INSTALL for rails..."
 bundle check || bundle install
 
+bundle exec rake assets:precompile
+
 if [ -f tmp/pids/server.pid ]; then
   rm -f tmp/pids/server.pid
 fi

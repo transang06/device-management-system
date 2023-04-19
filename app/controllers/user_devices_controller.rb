@@ -15,7 +15,10 @@ class UserDevicesController < ApplicationController
     if @user_device.save
       respond_to do |format|
         format.html{redirect_to device_path(id: @device.id), notice: t(".success")}
-        format.turbo_stream{flash.now[:notice] = t(".success")}
+        format.turbo_stream{
+          @modal = true
+          flash.now[:notice] = t(".success")
+        }
       end
     else
       render :new, status: :unprocessable_entity
@@ -34,6 +37,6 @@ class UserDevicesController < ApplicationController
 
   def users_except_using
     users = current_user.office.users
-    @users_except_using = users.left_joins(:user_devices).where.not(user_devices: {status: :using}).uniq
+    @users_except_using = users.left_joins(:user_devices)
   end
 end

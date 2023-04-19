@@ -25,4 +25,7 @@
   <span class="px-2 py-2 font-semibold text-indigo-600 rounded-full w-36 text-right">
     <%= UserDevice.human_enum_name :status, user_device&.status %>
   </span>
+  <% if @modal %>
+    <button data-controller="modal1" data-action= "click@window->modal#close"></button>
+  <% end %>
 </li>
